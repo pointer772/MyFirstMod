@@ -1,6 +1,8 @@
 package net.lewis.firstmod;
 
 import com.mojang.logging.LogUtils;
+import net.lewis.firstmod.block.ModBlocks;
+import net.lewis.firstmod.item.ModItems;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -13,10 +15,13 @@ import org.slf4j.Logger;
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(FirstMod.MOD_ID)
 public class FirstMod {
-    public static final String MOD_ID = "firstmod";
+    public static final String MOD_ID = "firstmod"; //Mod ID Must Be LowerCase
     private static final Logger LOGGER = LogUtils.getLogger();
     public FirstMod(){
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        ModItems.register(modEventBus); //points towards the mod items class
+        ModBlocks.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
@@ -35,5 +40,5 @@ public class FirstMod {
 
         }
     }
-    //Remove this
+
 }
